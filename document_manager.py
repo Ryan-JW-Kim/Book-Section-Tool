@@ -1,6 +1,6 @@
 
 
-class _Doc:
+class Document_manager:
   
     __init__(self, document_name):
       
