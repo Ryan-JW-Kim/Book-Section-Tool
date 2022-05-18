@@ -15,7 +15,7 @@ def main()
     
   new_document = Document_manager(f"a{document_name}")
   
-  new_document.write_to_file(rules_object.proposed_changes)
+  rules_object.proposed_changes.write_to_file()
   
   
 if __name__ == "__main__":
