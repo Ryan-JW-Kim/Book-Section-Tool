@@ -1,23 +1,30 @@
+from document_manager import DocManager
+import argparse
 import sys
-import rule_manager
-import document_manager
+import os
 
-def main()
-  
-  document_name = sys.argv[1]
-  
-  document_object = Document_manager(document_name)
-  rules_object = Rule_manager()
-  
-  for iter in document_object.body:
-    
-    rules_object.apply_rules(iter)
-    
-  new_document = Document_manager(f"a{document_name}")
-  
-  rules_object.proposed_changes.write_to_file()
-  
-  
+
+def main():
+
+	parser = argparse.ArgumentParser()
+
+	parser.add_argument("-q", action = "store_true")
+	parser.add_argument("-i", action = "store_true")
+	parser.add_argument("-d", action = "store_true")
+	parser.add_argument("-s", action = "store_true")
+	args = parser.parse_args()
+
+	
+	document_name = f"test.docx"#sys.argv[1]
+
+	document_object = DocManager(document_name)
+
+	flag_list = document_object.flag_markers(args)
+
+	new_document = DocManager.assemble_from_flags(f"edited-{document_name}", flag_list, document_object)
+
+	new_document.save()
+
 if __name__ == "__main__":
-  
-  main()
+
+	main()
